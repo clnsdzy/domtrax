@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Globe, Clock, Activity, LayoutDashboard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -29,6 +30,19 @@ export default function LandingPage() {
           <Button asChild size="lg" className="mt-4">
             <Link href="/login">Get Started</Link>
           </Button>
+          
+          <div className="mt-12 w-full max-w-4xl">
+            <div className="relative rounded-lg overflow-hidden shadow-[0_0_60px_rgba(255,255,255,0.3)]">
+              <Image
+                src="/hero-dashboard.png"
+                alt="DomTrax Dashboard"
+                width={1280}
+                height={720}
+                priority
+                className="w-full h-auto"
+              />
+            </div>
+          </div>
         </section>
 
         <section className="container mx-auto px-4 pb-24">
