@@ -1,8 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
-import { useState } from "react";
 import { Globe, CalendarClock, FileText, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -16,10 +14,7 @@ interface DomainCardProps {
 }
 
 export function DomainCard({ domain, onDelete }: DomainCardProps) {
-  const [imgError, setImgError] = useState(false);
   const days = getDaysRemaining(domain.expiryDate);
-
-  const screenshotUrl = `https://mini.s-shot.ru/1280x720/PNG/1024/Z1/?https://${domain.name}`;
 
   const statusBadge =
     days < 0 ? (
@@ -32,31 +27,8 @@ export function DomainCard({ domain, onDelete }: DomainCardProps) {
 
   return (
     <div className="group relative rounded-lg border border-border bg-card overflow-hidden shadow-sm transition-all duration-200 hover:shadow-md hover:-translate-y-0.5">
-      {/* Screenshot image */}
-      <Link href={`/domain/${domain.id}`} className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-t-lg">
-        <div className="relative w-full h-36 bg-muted overflow-hidden">
-          {!imgError ? (
-            <Image
-              src={screenshotUrl}
-              alt={`Screenshot of ${domain.name}`}
-              fill
-              className="object-cover object-top transition-transform duration-300 group-hover:scale-105"
-              onError={() => setImgError(true)}
-              unoptimized
-            />
-          ) : (
-            <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 text-muted-foreground">
-              <Globe className="h-8 w-8 opacity-30" />
-              <span className="text-xs">{domain.name}</span>
-            </div>
-          )}
-          {/* Overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-card/60 to-transparent pointer-events-none" />
-        </div>
-      </Link>
-
       {/* Card body */}
-      <Link href={`/domain/${domain.id}`} className="block px-4 pt-3 pb-1 focus:outline-none">
+      <Link href={`/domain/${domain.id}`} className="block px-4 pt-4 pb-1 focus:outline-none">
         <div className="flex items-start justify-between gap-2">
           <div className="flex items-center gap-1.5 min-w-0">
             <Globe className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
