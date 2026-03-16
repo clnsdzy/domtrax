@@ -104,6 +104,21 @@ export function addDomain(domain: Omit<Domain, "id" | "status">): Domain {
   return newDomain;
 }
 
+export function updateDomain(id: string, updates: Partial<Omit<Domain, "id" | "status">>): Domain | null {
+  const domains = getDomains();
+  const index = domains.findIndex((d) => d.id === id);
+  if (index === -1) return null;
+  
+  const updatedDomain: Domain = {
+    ...domains[index],
+    ...updates,
+    status: getDomainStatus(updates.expiryDate || domains[index].expiryDate),
+  };
+  domains[index] = updatedDomain;
+  localStorage.setItem(DOMAINS_KEY, JSON.stringify(domains));
+  return updatedDomain;
+}
+
 export function deleteDomain(id: string): void {
   const domains = getDomains();
   const filtered = domains.filter((d) => d.id !== id);

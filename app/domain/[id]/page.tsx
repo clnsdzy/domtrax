@@ -88,9 +88,11 @@ export default function DomainDetailPage() {
                 </Badge>
               </div>
               <div className="flex gap-2">
-                <Button variant="outline" disabled>
-                  <Pencil className="mr-2 h-4 w-4" />
-                  Edit
+                <Button variant="outline" asChild>
+                  <Link href={`/domain/${domain.id}/edit`}>
+                    <Pencil className="mr-2 h-4 w-4" />
+                    Edit
+                  </Link>
                 </Button>
                 <Button variant="destructive" onClick={() => setDeleteDialogOpen(true)}>
                   <Trash2 className="mr-2 h-4 w-4" />
